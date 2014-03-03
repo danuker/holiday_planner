@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>Employees</title>
+    <meta content="">
+    <style></style>
+  </head>
+  <body>
+  <h1>Employees</h1>
+  <table id = 'employees'> 
+    <tr>
+        <th>Name</th>
+        <th>Vacation days</th>
+    </tr>
+    {% for emp in employees %}
+        <tr>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.vacation_days }}</td>
+        </tr>
+    {% endfor %}
+  </table>
+  </body>
+</html>

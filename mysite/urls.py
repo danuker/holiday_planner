@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from holiday_planner.views import hello
+from holiday_planner.views import *
 
 admin.autodiscover()
 
@@ -10,5 +10,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^hello/$', hello),
+    url(r'^$', home),
+
+    url(r'^holidays/([a-zA-Z][a-zA-Z0-9_]*)/$', holidays),
+    url(r'^employees/$', list_employees),
 )
