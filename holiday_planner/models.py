@@ -2,7 +2,8 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
+from django.contrib.auth import authenticate
 
 
 class Employee(models.Model):
@@ -27,6 +28,7 @@ class Vacation(models.Model):
                     self.vac_date,
                     'Approved' if self.is_approved else 'Requested'])
 
+    @property
     def is_in_future(self):
         return (timezone.UTC() <
                 timezone.make_aware(self.vac_date, 'UTC'))
