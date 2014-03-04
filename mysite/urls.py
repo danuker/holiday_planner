@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home),
 
-    url(r'^my_holidays/$', my_holidays),
-    url(r'^holidays/([a-zA-Z][a-zA-Z0-9_]*)/$', holidays),
-    url(r'^employees/$', list_employees),
+    url(r'^my_holidays/$', my_holidays),  # Current user's
+    url(r'^holidays/([a-zA-Z][a-zA-Z0-9_]*)/$', holidays),  # Other user's
+    url(r'^employees/$', list_employees),  # Manager's view
 )

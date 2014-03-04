@@ -17,7 +17,10 @@ def home(request):
 
     if request.user.is_authenticated():
         redirect('/my_holidays/')
-
+    if request.method == 'POST':
+        user = authenticate(request.POST['username'], request.POST['password'])
+        if user is not None:
+            redirect()
     t = get_template('home.html')
     return HttpResponse(t.render(Context()))
 
@@ -30,6 +33,7 @@ def my_holidays(request):
     t = get_template('holidays.html')
     c = Context({'username': username,
                  'holidays': vacations,
+                 'user_type': 'regular',
                  })
     return HttpResponse(t.render(c))
 
@@ -41,6 +45,7 @@ def holidays(request, username):
     t = get_template('holidays.html')
     c = Context({'username': username,
                  'holidays': vacations,
+                 'user_type': 'manager',
                  })
     return HttpResponse(t.render(c))
 
@@ -48,6 +53,7 @@ def holidays(request, username):
 @permission_required('holiday_planner.manage')
 def list_employees(request):
     employees = [{'name': e.user.first_name + ' ' + e.user.last_name,
+                  'username': e.user.username,
                   'vacation_days': e.vacation_days}
                  for e in Employee.objects.all()]
 

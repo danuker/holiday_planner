@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import authenticate
 
@@ -30,5 +31,10 @@ class Vacation(models.Model):
 
     @property
     def is_in_future(self):
-        return (timezone.UTC() <
-                timezone.make_aware(self.vac_date, 'UTC'))
+        return (datetime.utcnow() >
+                self.vac_date)  # TODO: fix
+
+    class Meta:
+        permissions = (
+            ("manage", "Can manage vacation requests"),
+            )
